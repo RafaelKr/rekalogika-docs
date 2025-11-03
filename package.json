@@ -18,6 +18,7 @@
     "@docusaurus/preset-classic": "^3.8.0",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
+    "copy-text-to-clipboard": "^3.2.2",
     "docusaurus-lunr-search": "^3.5.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0",
