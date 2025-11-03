@@ -39,3 +39,31 @@ $adapter = new SelectableAdapter(
     indexBy: 'id',
 );
 ```
+
+## `ManyToMany` Collections and Inheritance
+
+Doctrine currently does not support this specific combination:
+
+* `manyToMany` relationship,
+* The involved entities have inheritance mapping,
+* Using `->matching($criteria)` on the collection.
+
+Therefore, if you are using `SelectableAdapter` on such a collection, you will
+encounter one of these errors:
+
+* Doctrine incorrectly instantiates the base class instead of the correct
+  subclass.
+* You get an exception saying `The provided class "class" is abstract, and
+  cannot be instantiated`.
+* You get an exception saying `ResultSetMapping builder does not currently
+  support your inheritance scheme`
+
+IIRC, the specific error you are getting depends on whether `DiscriminatorMap`
+is defined on the class, and whether the base class is abstract.
+
+Workaround: Use `QueryBuilderAdapter` instead of `SelectableAdapter`.
+
+Related issues:
+
+* [issue #7151](https://github.com/doctrine/orm/issues/7151)
+* [PR #7878](https://github.com/doctrine/orm/pull/7878)
