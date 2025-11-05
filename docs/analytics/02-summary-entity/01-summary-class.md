@@ -237,7 +237,7 @@ class OrderSummary extends Summary implements HasQueryBuilderModifier
     // highlight-start
     public function modifyQueryBuilder(QueryBuilder $queryBuilder): void
     {
-        $queryBuilder->andWhere('o.id > 100000');
+        $queryBuilder->andWhere('root.id > 100000');
     }
     // highlight-end
 
