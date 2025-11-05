@@ -44,13 +44,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Rekalogika\Analytics\Core\Metadata as Analytics;
 use Rekalogika\Analytics\Core\Partition\UuidV7IntegerPartition;
 use Rekalogika\Analytics\Core\Entity\BaseSummary;
-use Rekalogika\Analytics\Core\ValueResolver\UuidToTruncatedInteger;
+use Rekalogika\Analytics\Uuid\ValueResolver\StringUuidToTruncatedInteger;
 
 class YourSummary extends BaseSummary
 {
     // highlight-start
     #[ORM\Embedded()]
-    #[Analytics\Partition(new UuidToTruncatedInteger('id'))]
+    #[Analytics\Partition(new StringUuidToTruncatedInteger('id'))]
     private UuidV7IntegerPartition $partition;
     // highlight-end
 }
@@ -98,7 +98,7 @@ using 11, 22, 33, 44, and 55 bits of width. A 11-bit partition aggregates up to
 ### `UuidV7IntegerPartition`
 
 Suitable for partitioning UUIDv7 (also ULID) primary keys. It should be coupled
-by a `UuidToTruncatedInteger` value resolver that truncates the 128-bit
+by a `StringUuidToTruncatedInteger` value resolver that truncates the 128-bit
 UUID to a 48-bit integer.
 
 UUIDv7 (and ULID) stores the creation time in the first 48 bits. So, the widths
